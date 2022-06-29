@@ -79,3 +79,30 @@ $(function() {
     $("#score-text").html(score);
   });
 });
+
+//Temporizador
+//Temporizador
+function tiempo(){
+  if(segundo!=-1){
+		segundo--
+  }
+
+	if(segundo==-1){
+    segundo=59;
+		if(minuto==0){
+			$(".panel-tablero").hide("drop","slow",marcadores);
+			$(".time").hide();
+    }
+    minuto--
+  }
+  if (segundo<=9) {
+    $("#timer").html("0"+minuto+":"+"0"+segundo);
+  }else{
+    $("#timer").html("0"+minuto+":"+segundo);
+  }
+};
+
+//funcion para poner el marcador en pantalla completa
+function marcadores(){
+	$( ".panel-score" ).animate({width:'100%'},3000);
+};
