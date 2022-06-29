@@ -48,3 +48,34 @@ function reinsertar() {
     $(".col-7").prepend("<img src='image/"+dulces+".png' class='ui-draggable ui-droppable ui-draggable-handle'/>");
   };
 }
+
+var mov=0;
+var score=0;
+var minuto=2;
+var segundo=0;
+var temporizador=0;
+var matriz=0;
+
+//boton de Inicio y de reinicio
+$(function() {
+  $(".btn-reinicio").click(function () {
+    clearInterval(temporizador);
+    $(".panel-score").css("width","25%");
+  	$(".panel-tablero").show();
+    mov=0;
+    score=0;
+    var a=1;
+    while (a<=7) {
+      $(".col-"+a).empty();
+      a++;
+    };
+    temporizador=setInterval('tiempo()',1000);
+    $(".time").show();
+    setInterval('reinsertar()',500);
+    $(this).text("Reiniciar");
+    minuto=2;
+    segundo=0;
+    $("#movimientos-text").html(mov)
+    $("#score-text").html(score);
+  });
+});
