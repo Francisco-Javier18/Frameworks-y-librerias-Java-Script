@@ -1,6 +1,7 @@
 //metodos setInterval
 setInterval('amarillo()',3000);
 setInterval('white()',5000);
+setInterval('verificarVertical()',500);
 //funciones para el cambio de color
 function amarillo(){
   $(".main-titulo").css("color","yellow")
@@ -81,7 +82,6 @@ $(function() {
 });
 
 //Temporizador
-//Temporizador
 function tiempo(){
   if(segundo!=-1){
 		segundo--
@@ -106,3 +106,71 @@ function tiempo(){
 function marcadores(){
 	$( ".panel-score" ).animate({width:'100%'},3000);
 };
+
+//funcion para verificar si hay juegos de 3 dulces en vertical
+function verificarVertical() {
+    var uno=[], dos=[], tres=[], cuatro=[], cinco=[], seis=[], siete=[];
+    for (var i = 0; i <= 6; i++) {
+      uno[i]=$(".col-1").find( "img" ).eq( i ).attr('src');
+      dos[i]=$(".col-2").find( "img" ).eq( i ).attr('src');
+      tres[i]=$(".col-3").find( "img" ).eq( i ).attr('src');
+      cuatro[i]=$(".col-4").find( "img" ).eq( i ).attr('src');
+      cinco[i]=$(".col-5").find( "img" ).eq( i ).attr('src');
+      seis[i]=$(".col-6").find( "img" ).eq( i ).attr('src');
+      siete[i]=$(".col-7").find( "img" ).eq( i ).attr('src');
+    };
+    for(var j=1;j<8;j++){
+  		matriz=matriz+$(".col-"+j).children().length;
+    };
+    for (var c = 0, d=1, e=2; e <=6; e++) {
+      if (uno[c]==uno[d]&&uno[d]==uno[e]&&matriz==49) {
+        $(".col-1").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-1").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-1").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (dos[c]==dos[d]&&dos[d]==dos[e]&&matriz==49) {
+        $(".col-2").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-2").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-2").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (tres[c]==tres[d]&&tres[d]==tres[e]&&matriz==49) {
+        $(".col-3").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-3").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-3").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (cuatro[c]==cuatro[d]&&cuatro[d]==cuatro[e]&&matriz==49) {
+        $(".col-4").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-4").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-4").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (cinco[c]==cinco[d]&&cinco[d]==cinco[e]&&matriz==49) {
+        $(".col-5").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-5").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-5").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (seis[c]==seis[d]&&seis[d]==seis[e]&&matriz==49) {
+        $(".col-6").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-6").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-6").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      if (siete[c]==siete[d]&&siete[d]==siete[e]&&matriz==49) {
+        $(".col-7").find( "img" ).eq( c ).attr("class","borrar");
+        $(".col-7").find( "img" ).eq( d ).attr("class","borrar");
+        $(".col-7").find( "img" ).eq( e ).attr("class","borrar");
+        score=score+5;
+      };
+      $(".borrar").hide("pulsate",1400,function(){
+        $(this).remove();
+      });
+      c++;
+      d++;
+      $("#score-text").html(score);
+    }
+    matriz=0;
+}
