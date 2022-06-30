@@ -1,7 +1,9 @@
 //metodos setInterval
 setInterval('amarillo()',3000);
 setInterval('white()',5000);
+
 setInterval('verificarVertical()',500);
+setInterval('verificarHorizontal()',500);
 //funciones para el cambio de color
 function amarillo(){
   $(".main-titulo").css("color","yellow")
@@ -174,3 +176,57 @@ function verificarVertical() {
     }
     matriz=0;
 }
+
+//Funcion para verificar si hay juegos de 3 dulces en horizontal
+function verificarHorizontal() {
+    var unoH=[], dosH=[], tresH=[], cuatroH=[], cincoH=[], seisH=[], sieteH=[];
+    for (var iH = 0; iH <= 6; iH++) {
+      unoH[iH]=$(".col-1").find( "img" ).eq( iH ).attr('src');
+      dosH[iH]=$(".col-2").find( "img" ).eq( iH ).attr('src');
+      tresH[iH]=$(".col-3").find( "img" ).eq( iH ).attr('src');
+      cuatroH[iH]=$(".col-4").find( "img" ).eq( iH ).attr('src');
+      cincoH[iH]=$(".col-5").find( "img" ).eq( iH ).attr('src');
+      seisH[iH]=$(".col-6").find( "img" ).eq( iH ).attr('src');
+      sieteH[iH]=$(".col-7").find( "img" ).eq( iH ).attr('src');
+    };
+    for(var j=1;j<8;j++){
+      matriz=matriz+$(".col-"+j).children().length;
+    };
+    for (var cH = 0; cH <=6; cH++) {
+      if (unoH[cH]==dosH[cH]&&unoH[cH]==tresH[cH]&&matriz==49) {
+        $(".col-1").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-2").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-3").find( "img" ).eq( cH ).attr("class","borrar2");
+        score=score+5;
+      };
+      if (dosH[cH]==tresH[cH]&&dosH[cH]==cuatroH[cH]&&matriz==49) {
+        $(".col-2").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-3").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-4").find( "img" ).eq( cH ).attr("class","borrar2");
+        score=score+5;
+      };
+      if (tresH[cH]==cuatroH[cH]&&tresH[cH]==cincoH[cH]&&matriz==49) {
+        $(".col-3").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-4").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-5").find( "img" ).eq( cH ).attr("class","borrar2");
+        score=score+5;
+      };
+      if (cuatroH[cH]==cincoH[cH]&&cuatroH[cH]==seisH[cH]&&matriz==49) {
+        $(".col-4").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-5").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-6").find( "img" ).eq( cH ).attr("class","borrar2");
+        score=score+5;
+      };
+      if (cincoH[cH]==seisH[cH]&&cincoH[cH]==sieteH[cH]&&matriz==49) {
+        $(".col-5").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-6").find( "img" ).eq( cH ).attr("class","borrar2");
+        $(".col-7").find( "img" ).eq( cH ).attr("class","borrar2");
+        score=score+5;
+      };
+    }
+    $(".borrar2").hide("pulsate",1400,function(){
+      $(".borrar2").remove();
+      $("#score-text").html(score);
+    });
+    matriz=0;
+};
