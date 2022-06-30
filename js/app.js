@@ -230,3 +230,38 @@ function verificarHorizontal() {
     });
     matriz=0;
 };
+
+$("img").draggable({
+   containment:".panel-tablero",
+   revert:true,
+   revertDuration:1,
+   stop:function(event,ui){
+     mov=mov+1;
+     $("#movimientos-text").html(mov);
+   }
+});
+
+$("img").droppable({
+ drop:function (event,ui){
+   var dropped=ui.draggable;
+   var droppedOn=this;
+   espera=dropped.intercambiar($(droppedOn));
+ },
+});
+
+//Función para intercambiar dulces
+jQuery.fn.intercambiar=function(b){
+	b=jQuery(b)[0];
+  console.log(b)
+	var a=this[0];
+  console.log(a)
+
+
+	var t=a.parentNode.insertBefore(document.createTextNode(''),a);
+	b.parentNode.insertBefore(a,b);
+	t.parentNode.insertBefore(b,t);
+	t.parentNode.removeChild(t);
+  console.log(this)
+	return this;
+
+};
