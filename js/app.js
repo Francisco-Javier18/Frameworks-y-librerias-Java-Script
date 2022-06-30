@@ -231,23 +231,27 @@ function verificarHorizontal() {
     matriz=0;
 };
 
-$("img").draggable({
-   containment:".panel-tablero",
-   revert:true,
-   revertDuration:1,
-   stop:function(event,ui){
-     mov=mov+1;
-     $("#movimientos-text").html(mov);
-   }
-});
+setInterval('eliminar()', 500);
 
-$("img").droppable({
- drop:function (event,ui){
-   var dropped=ui.draggable;
-   var droppedOn=this;
-   espera=dropped.intercambiar($(droppedOn));
- },
-});
+  function eliminar(){
+	 $("img").draggable({
+			containment:".panel-tablero",
+			revert:true,
+			revertDuration:1,
+			stop:function(event,ui){
+				mov=mov+1;
+				$("#movimientos-text").html(mov);
+      }
+	 });
+
+	$("img").droppable({
+		drop:function (event,ui){
+			var dropped=ui.draggable;
+			var droppedOn=this;
+			espera=dropped.intercambiar($(droppedOn));
+    },
+	});
+};
 
 //Función para intercambiar dulces
 jQuery.fn.intercambiar=function(b){
